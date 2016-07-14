@@ -48,6 +48,14 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="protobuf-net, Version=2.1.0.0, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
+      <HintPath>..\packages\protobuf-net.2.1.0\lib\net451\protobuf-net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RabbitMQ.Client, Version=3.6.3.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <HintPath>..\packages\RabbitMQ.Client.3.6.3\lib\net45\RabbitMQ.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -98,6 +106,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RabbitMQ\AccountRegister\AccountRegisterMessageHandler.cs" />
+    <Compile Include="RabbitMQ\AccountRegister\AccountRegisterMessagePublisher.cs" />
+    <Compile Include="RabbitMQ\IMessageHandler.cs" />
+    <Compile Include="RabbitMQ\IMessagePublisher.cs" />
+    <Compile Include="RabbitMQ\MessageHandler.cs" />
+    <Compile Include="RabbitMQ\MessagePublisher.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -113,6 +127,16 @@
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\YunOffice.UserCenter.BusnissLogic\YunOffice.UserCenter.BusnissLogic.csproj">
+      <Project>{75522ef3-0151-4ec9-8ff6-c7939b2a5181}</Project>
+      <Name>YunOffice.UserCenter.BusnissLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YunOffice.UserCenter.Entities\YunOffice.UserCenter.Entities.csproj">
+      <Project>{fbbd0551-5b6d-41ea-a88d-23f03f82f623}</Project>
+      <Name>YunOffice.UserCenter.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
