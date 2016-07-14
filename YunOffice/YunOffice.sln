@@ -21,6 +21,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02 DataAccess", "02 DataAcc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YunOffice.UserCenter.DataAccess", "YunOffice.UserCenter.DataAccess\YunOffice.UserCenter.DataAccess.csproj", "{8C83109D-5466-4972-AAED-4D5DC4EC5FCD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03 BusnissLogic", "03 BusnissLogic", "{7495975B-1DE6-4FCD-99BF-E57A9ECA84F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YunOffice.UserCenter.BusnissLogic", "YunOffice.UserCenter.BusnissLogic\YunOffice.UserCenter.BusnissLogic.csproj", "{75522EF3-0151-4EC9-8FF6-C7939B2A5181}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +51,10 @@ Global
 		{8C83109D-5466-4972-AAED-4D5DC4EC5FCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C83109D-5466-4972-AAED-4D5DC4EC5FCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C83109D-5466-4972-AAED-4D5DC4EC5FCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75522EF3-0151-4EC9-8FF6-C7939B2A5181}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75522EF3-0151-4EC9-8FF6-C7939B2A5181}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75522EF3-0151-4EC9-8FF6-C7939B2A5181}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75522EF3-0151-4EC9-8FF6-C7939B2A5181}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,5 +67,7 @@ Global
 		{FBBD0551-5B6D-41EA-A88D-23F03F82F623} = {B7D33382-D4E2-4A6F-923E-12628F58BEBF}
 		{44AC8CCE-256D-493E-9586-C2D84412C66D} = {F459B73E-FBD6-4C90-85EF-29ABA90D37A1}
 		{8C83109D-5466-4972-AAED-4D5DC4EC5FCD} = {44AC8CCE-256D-493E-9586-C2D84412C66D}
+		{7495975B-1DE6-4FCD-99BF-E57A9ECA84F1} = {F459B73E-FBD6-4C90-85EF-29ABA90D37A1}
+		{75522EF3-0151-4EC9-8FF6-C7939B2A5181} = {7495975B-1DE6-4FCD-99BF-E57A9ECA84F1}
 	EndGlobalSection
 EndGlobal
