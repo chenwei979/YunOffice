@@ -44,6 +44,10 @@
     <Compile Include="UserBusnissLogic.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\YunOffice.Common\YunOffice.Common.csproj">
+      <Project>{8cc5d3c0-23a3-4e17-a8c8-0535be5ee2c6}</Project>
+      <Name>YunOffice.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\YunOffice.UserCenter.DataAccess\YunOffice.UserCenter.DataAccess.csproj">
       <Project>{8c83109d-5466-4972-aaed-4d5dc4ec5fcd}</Project>
       <Name>YunOffice.UserCenter.DataAccess</Name>
