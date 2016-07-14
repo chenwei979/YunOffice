@@ -222,6 +222,10 @@
     <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\YunOffice.Common\YunOffice.Common.csproj">
+      <Project>{8cc5d3c0-23a3-4e17-a8c8-0535be5ee2c6}</Project>
+      <Name>YunOffice.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\YunOffice.UserCenter.BusnissLogic\YunOffice.UserCenter.BusnissLogic.csproj">
       <Project>{75522ef3-0151-4ec9-8ff6-c7939b2a5181}</Project>
       <Name>YunOffice.UserCenter.BusnissLogic</Name>

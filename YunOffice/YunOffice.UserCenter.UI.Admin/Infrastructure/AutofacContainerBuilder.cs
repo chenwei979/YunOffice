@@ -38,14 +38,13 @@ namespace YunOffice.UserCenter.UI.Admin.Infrastructure
         {
             RegisterControllers();
 
-            var assemblies = BuildManager.GetReferencedAssemblies().Cast<Assembly>().Where(item => item.FullName.StartsWith("Ak.", StringComparison.InvariantCultureIgnoreCase)).ToArray();
+            var assemblies = BuildManager.GetReferencedAssemblies().Cast<Assembly>().Where(item => item.FullName.StartsWith("YunOffice.UserCenter", StringComparison.InvariantCultureIgnoreCase)).ToArray();
             var types = assemblies.SelectMany(assembly => assembly.GetTypes());
-            _builder.RegisterTypes(types.Where(t => t.Name.EndsWith("BLL")).ToArray()).PropertiesAutowired();
-            _builder.RegisterTypes(types.Where(t => t.Name.EndsWith("DAL")).ToArray()).PropertiesAutowired();
-
-            //_builder.RegisterType(typeof(YunOffice.UserCenter.Entities.AkDbContext)).As(typeof(Ak.Entities.IDbContext)).InstancePerLifetimeScope();
-            //_builder.RegisterType(typeof(Ak.Entities.EfUnitOfWork)).As(typeof(Ak.Entities.IUnitOfWork)).InstancePerLifetimeScope();
-            //_builder.RegisterGeneric(typeof(Ak.Entities.EfRepository<>)).As(typeof(Ak.Entities.IRepository<>)).InstancePerLifetimeScope();
+            _builder.RegisterTypes(types.Where(t => t.Name.EndsWith("BusnissLogic")).ToArray());
+            _builder.RegisterTypes(types.Where(t => t.Name.EndsWith("DataAccess")).ToArray());
+            _builder.RegisterType(typeof(Common.DataAccess.SqlServerDatabase)).As(typeof(Common.DataAccess.IDatabase)).InstancePerLifetimeScope();
+            _builder.RegisterType(typeof(Common.DataAccess.UnitOfWork)).As(typeof(Common.DataAccess.IUnitOfWork)).InstancePerLifetimeScope();
+            _builder.RegisterGeneric(typeof(Common.DataAccess.Repository<>)).As(typeof(Common.DataAccess.IRepository<>)).InstancePerLifetimeScope();
         }
 
         /// <summary>
@@ -54,7 +53,7 @@ namespace YunOffice.UserCenter.UI.Admin.Infrastructure
         private void RegisterControllers()
         {
             var mvcAssembly = Assembly.GetExecutingAssembly();
-            _builder.RegisterAssemblyTypes(mvcAssembly).Where(t => t.Name.EndsWith("Controller")).AssignableTo(typeof(IController)).PropertiesAutowired();
+            _builder.RegisterAssemblyTypes(mvcAssembly).Where(t => t.Name.EndsWith("Controller")).AssignableTo(typeof(IController));
         }
     }
 }
