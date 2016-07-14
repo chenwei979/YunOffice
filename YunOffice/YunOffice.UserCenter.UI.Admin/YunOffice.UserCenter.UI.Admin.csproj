@@ -192,6 +192,7 @@
     <Compile Include="Infrastructure\JsonNetResult.cs" />
     <Compile Include="Infrastructure\ModelStateDictionaryExtension.cs" />
     <Compile Include="Infrastructure\PagedListExtension.cs" />
+    <Compile Include="Models\AccountRegisterViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RabbitMQ\AccountRegister\AccountRegisterMessageHandler.cs" />
     <Compile Include="RabbitMQ\AccountRegister\AccountRegisterMessagePublisher.cs" />
@@ -219,7 +220,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>

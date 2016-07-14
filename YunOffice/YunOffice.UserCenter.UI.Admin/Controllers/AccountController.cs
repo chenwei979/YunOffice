@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using YunOffice.UserCenter.BusnissLogic;
 using YunOffice.UserCenter.UI.Admin.RabbitMQ.AccountRegister;
-using YunOffice.UserCenter.Entities;
+using YunOffice.UserCenter.UI.Admin.Models;
 
 namespace YunOffice.UserCenter.UI.Admin.Controllers
 {
@@ -44,7 +44,7 @@ namespace YunOffice.UserCenter.UI.Admin.Controllers
         [HttpPost]
         public ActionResult Register(string displayname, string username, string password)
         {
-            MessagePublisher.Push(new UserEntity()
+            MessagePublisher.Push(new AccountRegisterViewModel()
             {
                 Account = username,
                 Password = password,
