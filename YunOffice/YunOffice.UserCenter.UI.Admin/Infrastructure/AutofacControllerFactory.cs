@@ -1,11 +1,4 @@
-﻿/*
- *auhor: Bruce
- *date: 20160413
- *function:1.引入autoFac
- *         2.实现DefaultControllerFactory的方法GetControllerInstance
- * 
- */
-using Autofac;
+﻿using Autofac;
 using System;
 using System.Web.Mvc;
 using System.Web.Routing;

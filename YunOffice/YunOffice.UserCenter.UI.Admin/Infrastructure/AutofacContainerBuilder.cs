@@ -1,11 +1,4 @@
-﻿/*
- *auhor: Bruce
- *date: 20160413
- *function:1.引入autoFac
- *         2.注册类型构造IOC容器
- * 
- */
-using Autofac;
+﻿using Autofac;
 using System;
 using System.Linq;
 using System.Reflection;

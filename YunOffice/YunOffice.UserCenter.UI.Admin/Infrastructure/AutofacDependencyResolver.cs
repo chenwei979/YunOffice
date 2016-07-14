@@ -1,11 +1,4 @@
-﻿/*
- *auhor: Bruce
- *date: 20160413
- *function:1.引入autoFac
- *         2.实现IDependencyResolver已实现依赖注入
- * 
- */
-using Autofac;
+﻿using Autofac;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
