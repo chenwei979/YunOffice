@@ -45,6 +45,9 @@ namespace YunOffice.UserCenter.UI.Admin.Infrastructure
             _builder.RegisterType(typeof(Common.DataAccess.SqlServerDatabase)).As(typeof(Common.DataAccess.IDatabase)).InstancePerLifetimeScope();
             _builder.RegisterType(typeof(Common.DataAccess.UnitOfWork)).As(typeof(Common.DataAccess.IUnitOfWork)).InstancePerLifetimeScope();
             _builder.RegisterGeneric(typeof(Common.DataAccess.Repository<>)).As(typeof(Common.DataAccess.IRepository<>)).InstancePerLifetimeScope();
+
+            _builder.RegisterType(typeof(RabbitMQ.AccountRegister.AccountRegisterMessagePublisher)).As(typeof(RabbitMQ.AccountRegister.AccountRegisterMessagePublisher)).SingleInstance();
+            _builder.RegisterType(typeof(RabbitMQ.AccountRegister.AccountRegisterMessageHandler)).As(typeof(RabbitMQ.AccountRegister.AccountRegisterMessageHandler)).SingleInstance();
         }
 
         /// <summary>
