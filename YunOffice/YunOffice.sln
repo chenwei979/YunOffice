@@ -17,6 +17,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01 Entities", "01 Entities"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YunOffice.UserCenter.Entities", "YunOffice.UserCenter.Entities\YunOffice.UserCenter.Entities.csproj", "{FBBD0551-5B6D-41EA-A88D-23F03F82F623}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02 DataAccess", "02 DataAccess", "{44AC8CCE-256D-493E-9586-C2D84412C66D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YunOffice.UserCenter.DataAccess", "YunOffice.UserCenter.DataAccess\YunOffice.UserCenter.DataAccess.csproj", "{8C83109D-5466-4972-AAED-4D5DC4EC5FCD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,10 @@ Global
 		{FBBD0551-5B6D-41EA-A88D-23F03F82F623}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FBBD0551-5B6D-41EA-A88D-23F03F82F623}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FBBD0551-5B6D-41EA-A88D-23F03F82F623}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C83109D-5466-4972-AAED-4D5DC4EC5FCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C83109D-5466-4972-AAED-4D5DC4EC5FCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C83109D-5466-4972-AAED-4D5DC4EC5FCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C83109D-5466-4972-AAED-4D5DC4EC5FCD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -49,5 +57,7 @@ Global
 		{1EC9A6F1-61D9-4144-BA27-9CAC9174E37F} = {CB201404-C529-49EA-A280-C04633AAFE1A}
 		{B7D33382-D4E2-4A6F-923E-12628F58BEBF} = {F459B73E-FBD6-4C90-85EF-29ABA90D37A1}
 		{FBBD0551-5B6D-41EA-A88D-23F03F82F623} = {B7D33382-D4E2-4A6F-923E-12628F58BEBF}
+		{44AC8CCE-256D-493E-9586-C2D84412C66D} = {F459B73E-FBD6-4C90-85EF-29ABA90D37A1}
+		{8C83109D-5466-4972-AAED-4D5DC4EC5FCD} = {44AC8CCE-256D-493E-9586-C2D84412C66D}
 	EndGlobalSection
 EndGlobal
