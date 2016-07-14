@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YunOffice.Common", "YunOffi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YunOffice.Common.RabbitMq", "YunOffice.Common.RabbitMq\YunOffice.Common.RabbitMq.csproj", "{78ABC00C-28AA-4D3C-9BD8-56F1FAB61E3D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YunOffice.Common.Redis", "YunOffice.Common.Redis\YunOffice.Common.Redis.csproj", "{1EC9A6F1-61D9-4144-BA27-9CAC9174E37F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{78ABC00C-28AA-4D3C-9BD8-56F1FAB61E3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78ABC00C-28AA-4D3C-9BD8-56F1FAB61E3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78ABC00C-28AA-4D3C-9BD8-56F1FAB61E3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EC9A6F1-61D9-4144-BA27-9CAC9174E37F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EC9A6F1-61D9-4144-BA27-9CAC9174E37F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EC9A6F1-61D9-4144-BA27-9CAC9174E37F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EC9A6F1-61D9-4144-BA27-9CAC9174E37F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,5 +36,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{8CC5D3C0-23A3-4E17-A8C8-0535BE5EE2C6} = {CB201404-C529-49EA-A280-C04633AAFE1A}
 		{78ABC00C-28AA-4D3C-9BD8-56F1FAB61E3D} = {CB201404-C529-49EA-A280-C04633AAFE1A}
+		{1EC9A6F1-61D9-4144-BA27-9CAC9174E37F} = {CB201404-C529-49EA-A280-C04633AAFE1A}
 	EndGlobalSection
 EndGlobal
