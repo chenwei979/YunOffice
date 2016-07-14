@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Threading.Tasks;
+﻿using System.Web.Mvc;
 using YunOffice.UserCenter.BusnissLogic;
+using YunOffice.UserCenter.UI.Admin.RabbitMQ.AccountRegister;
+using YunOffice.UserCenter.Entities;
 
 namespace YunOffice.UserCenter.UI.Admin.Controllers
 {
     public class AccountController : Controller
     {
         public UserBusnissLogic BusnissLogic { get; set; }
+        public AccountRegisterMessagePublisher MessagePublisher { get; set; }
 
-        public AccountController(UserBusnissLogic busnissLogic)
+        public AccountController(UserBusnissLogic busnissLogic, AccountRegisterMessagePublisher messagePublisher)
         {
             BusnissLogic = busnissLogic;
+            MessagePublisher = messagePublisher;
         }
 
         [HttpGet]
@@ -41,10 +40,14 @@ namespace YunOffice.UserCenter.UI.Admin.Controllers
         [HttpPost]
         public ActionResult Register(string displayname, string username, string password)
         {
-            var success = BusnissLogic.Register(displayname, username, password);
+            MessagePublisher.Push(new UserEntity()
+            {
+                Account = username,
+                Password = password,
+                DisplayName = displayname
+            });
 
-            if (success) return Redirect("/Home/Index/");
-            return View();
+            return Redirect("/Home/Index/");
         }
     }
 }
