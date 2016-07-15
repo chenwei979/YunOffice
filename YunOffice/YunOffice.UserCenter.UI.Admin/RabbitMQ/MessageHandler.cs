@@ -14,15 +14,16 @@ namespace YunOffice.UserCenter.UI.Admin.RabbitMQ
         protected IConnection Connection { get; set; }
         protected IModel Channel { get; set; }
         protected EventingBasicConsumer Consumer { get; set; }
+        public string QueueName { get; set; }
 
         public MessageHandler()
         {
-            var factory = new ConnectionFactory() { HostName = "localhost" };
+            var factory = new ConnectionFactory() { HostName = "localhost", UserName = "guest", Password = "123" };
             Connection = factory.CreateConnection();
             Channel = Connection.CreateModel();
 
-            var queueName = this.GetType().FullName.Replace("Handler", string.Empty);
-            Channel.QueueDeclare(queue: queueName,
+            QueueName = this.GetType().FullName.Replace("Handler", string.Empty);
+            Channel.QueueDeclare(queue: QueueName,
                                 durable: false,
                                 exclusive: false,
                                 autoDelete: false,
@@ -34,7 +35,7 @@ namespace YunOffice.UserCenter.UI.Admin.RabbitMQ
                 var message = Deserialize(ea.Body);
                 Hand(message);
             };
-            Channel.BasicConsume(queue: queueName, noAck: true, consumer: Consumer);
+            Channel.BasicConsume(queue: QueueName, noAck: true, consumer: Consumer);
         }
 
         public void Dispose()
@@ -47,9 +48,12 @@ namespace YunOffice.UserCenter.UI.Admin.RabbitMQ
 
         public TMessage Deserialize(byte[] message)
         {
-            var stream = new MemoryStream(message, false);
-            stream.Position = 0;
-            return Serializer.Deserialize<TMessage>(stream);
+            string json = System.Text.Encoding.UTF8.GetString(message);
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<TMessage>(json);
+
+            //var stream = new MemoryStream(message, false);
+            //stream.Position = 0;
+            //return Serializer.Deserialize<TMessage>(stream);
         }
     }
 }

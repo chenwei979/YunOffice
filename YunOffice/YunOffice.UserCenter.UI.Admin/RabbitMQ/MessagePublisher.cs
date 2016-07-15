@@ -9,13 +9,15 @@ namespace YunOffice.UserCenter.UI.Admin.RabbitMQ
     {
         protected IConnection Connection { get; set; }
         protected IModel Channel { get; set; }
+        public string QueueName { get; set; }
 
         public MessagePublisher()
         {
-            var factory = new ConnectionFactory() { HostName = "localhost" };
+            var factory = new ConnectionFactory() { HostName = "localhost", UserName = "guest", Password = "123" };
             Connection = factory.CreateConnection();
             Channel = Connection.CreateModel();
-            Channel.QueueDeclare(queue: this.GetType().FullName.Replace("Publisher", string.Empty),
+            QueueName = this.GetType().FullName.Replace("Publisher", string.Empty);
+            Channel.QueueDeclare(queue: QueueName,
                 durable: false,
                 exclusive: false,
                 autoDelete: false,
@@ -32,12 +34,15 @@ namespace YunOffice.UserCenter.UI.Admin.RabbitMQ
 
         public byte[] Serialize(TMessage message)
         {
-            var stream = new MemoryStream();
-            Serializer.Serialize(stream, message);
-            var bytes = new byte[stream.Length];
-            stream.Read(bytes, 0, bytes.Length);
-            stream.Seek(0, SeekOrigin.Begin);
-            return bytes;
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(message);
+            return System.Text.Encoding.UTF8.GetBytes(json);
+
+            //var stream = new MemoryStream();
+            //Serializer.Serialize(stream, message);
+            //var bytes = new byte[stream.Length];
+            //stream.Read(bytes, 0, bytes.Length);
+            //stream.Seek(0, SeekOrigin.Begin);
+            //return bytes;
         }
     }
 }
