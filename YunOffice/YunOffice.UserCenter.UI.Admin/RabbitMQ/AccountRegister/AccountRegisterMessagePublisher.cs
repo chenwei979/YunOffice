@@ -7,7 +7,7 @@ namespace YunOffice.UserCenter.UI.Admin.RabbitMQ.AccountRegister
         public override void Push(AccountRegisterViewModel message)
         {
             var bytes = Serialize(message);
-            Channel.BasicPublish(exchange: string.Empty, routingKey: "hello", basicProperties: null, body: bytes);
+            Channel.BasicPublish(exchange: string.Empty, routingKey: QueueName, basicProperties: null, body: bytes);
         }
     }
 }
