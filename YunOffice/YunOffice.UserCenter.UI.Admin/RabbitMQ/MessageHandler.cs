@@ -1,11 +1,7 @@
 ﻿using ProtoBuf;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace YunOffice.UserCenter.UI.Admin.RabbitMQ
 {
@@ -48,12 +44,12 @@ namespace YunOffice.UserCenter.UI.Admin.RabbitMQ
 
         public TMessage Deserialize(byte[] message)
         {
-            string json = System.Text.Encoding.UTF8.GetString(message);
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<TMessage>(json);
+            //string json = System.Text.Encoding.UTF8.GetString(message);
+            //return Newtonsoft.Json.JsonConvert.DeserializeObject<TMessage>(json);
 
-            //var stream = new MemoryStream(message, false);
-            //stream.Position = 0;
-            //return Serializer.Deserialize<TMessage>(stream);
+            var stream = new MemoryStream(message, false);
+            stream.Position = 0;
+            return Serializer.Deserialize<TMessage>(stream);
         }
     }
 }
