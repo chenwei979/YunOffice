@@ -198,8 +198,10 @@
     <Compile Include="RabbitMQ\AccountRegister\AccountRegisterMessagePublisher.cs" />
     <Compile Include="RabbitMQ\IMessageHandler.cs" />
     <Compile Include="RabbitMQ\IMessagePublisher.cs" />
+    <Compile Include="RabbitMQ\IMqConfig.cs" />
     <Compile Include="RabbitMQ\MessageHandler.cs" />
     <Compile Include="RabbitMQ\MessagePublisher.cs" />
+    <Compile Include="RabbitMQ\MqConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

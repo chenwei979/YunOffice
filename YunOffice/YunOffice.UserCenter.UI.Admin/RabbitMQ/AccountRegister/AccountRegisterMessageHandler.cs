@@ -8,7 +8,7 @@ namespace YunOffice.UserCenter.UI.Admin.RabbitMQ.AccountRegister
     {
         public UserBusnissLogic BusnissLogic { get; set; }
 
-        public AccountRegisterMessageHandler(UserBusnissLogic busnissLogic)
+        public AccountRegisterMessageHandler(IMqConfig config, UserBusnissLogic busnissLogic) : base(config)
         {
             BusnissLogic = busnissLogic;
         }

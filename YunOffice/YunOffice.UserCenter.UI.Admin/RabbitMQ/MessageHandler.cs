@@ -16,9 +16,9 @@ namespace YunOffice.UserCenter.UI.Admin.RabbitMQ
         protected EventingBasicConsumer Consumer { get; set; }
         public string QueueName { get; set; }
 
-        public MessageHandler()
+        public MessageHandler(IMqConfig config)
         {
-            var factory = new ConnectionFactory() { HostName = "192.168.232.128", UserName = "test_user", Password = "123" };
+            var factory = new ConnectionFactory() { HostName = config.HostName, UserName = config.UserName, Password = config.Password };
             Connection = factory.CreateConnection();
             Channel = Connection.CreateModel();
 
