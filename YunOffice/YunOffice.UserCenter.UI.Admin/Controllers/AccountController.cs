@@ -9,15 +9,12 @@ namespace YunOffice.UserCenter.UI.Admin.Controllers
     {
         public UserBusnissLogic BusnissLogic { get; set; }
         public AccountRegisterMessagePublisher MessagePublisher { get; set; }
-        public AccountRegisterMessageHandler MessageHandler { get; set; }
 
         public AccountController(UserBusnissLogic busnissLogic
-            , AccountRegisterMessagePublisher messagePublisher
-            , AccountRegisterMessageHandler messageHandler)
+            , AccountRegisterMessagePublisher messagePublisher)
         {
             BusnissLogic = busnissLogic;
             MessagePublisher = messagePublisher;
-            MessageHandler = messageHandler;
         }
 
         [HttpGet]
