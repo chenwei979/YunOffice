@@ -13,7 +13,7 @@ namespace YunOffice.UserCenter.UI.Admin.RabbitMQ
 
         public MessagePublisher()
         {
-            var factory = new ConnectionFactory() { HostName = "localhost", UserName = "guest", Password = "123" };
+            var factory = new ConnectionFactory() { HostName = "192.168.232.128", UserName = "test_user", Password = "123" };
             Connection = factory.CreateConnection();
             Channel = Connection.CreateModel();
             QueueName = this.GetType().FullName.Replace("Publisher", string.Empty);

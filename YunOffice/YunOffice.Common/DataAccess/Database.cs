@@ -75,7 +75,7 @@ namespace YunOffice.Common.DataAccess
     {
         public SqlServerDatabase()
         {
-            ConnectionString = "data source=192.168.0.45;initial catalog=YeeOffice;user id=sa;password=123;";
+            ConnectionString = "data source=localhost;initial catalog=YeeOffice;user id=sa;password=123;";
             DbConnection = new SqlConnection(ConnectionString);
         }
     }

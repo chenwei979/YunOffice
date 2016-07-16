@@ -18,7 +18,7 @@ namespace YunOffice.UserCenter.UI.Admin.RabbitMQ
 
         public MessageHandler()
         {
-            var factory = new ConnectionFactory() { HostName = "localhost", UserName = "guest", Password = "123" };
+            var factory = new ConnectionFactory() { HostName = "192.168.232.128", UserName = "test_user", Password = "123" };
             Connection = factory.CreateConnection();
             Channel = Connection.CreateModel();
 
