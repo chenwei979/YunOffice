@@ -42,11 +42,11 @@ namespace YunOffice.UserCenter.UI.Admin.Infrastructure
 
             var assemblies = BuildManager.GetReferencedAssemblies().Cast<Assembly>().Where(item => item.FullName.StartsWith("YunOffice.UserCenter", StringComparison.InvariantCultureIgnoreCase)).ToArray();
             var types = assemblies.SelectMany(assembly => assembly.GetTypes());
-            _builder.RegisterTypes(types.Where(t => t.Name.EndsWith("BusnissLogic")).ToArray()).InstancePerLifetimeScope();
-            _builder.RegisterTypes(types.Where(t => t.Name.EndsWith("DataAccess")).ToArray()).InstancePerLifetimeScope();
-            _builder.RegisterType(typeof(Common.DataAccess.SqlServerDatabase)).As(typeof(Common.DataAccess.IDatabase)).InstancePerLifetimeScope();
-            _builder.RegisterType(typeof(Common.DataAccess.UnitOfWork)).As(typeof(Common.DataAccess.IUnitOfWork)).InstancePerLifetimeScope();
-            _builder.RegisterGeneric(typeof(Common.DataAccess.Repository<>)).As(typeof(Common.DataAccess.IRepository<>)).InstancePerLifetimeScope();
+            _builder.RegisterTypes(types.Where(t => t.Name.EndsWith("BusnissLogic")).ToArray());
+            _builder.RegisterTypes(types.Where(t => t.Name.EndsWith("DataAccess")).ToArray());
+            _builder.RegisterType(typeof(Common.DataAccess.SqlServerDatabase)).As(typeof(Common.DataAccess.IDatabase));
+            _builder.RegisterType(typeof(Common.DataAccess.UnitOfWork)).As(typeof(Common.DataAccess.IUnitOfWork));
+            _builder.RegisterGeneric(typeof(Common.DataAccess.Repository<>)).As(typeof(Common.DataAccess.IRepository<>));
 
             _builder.RegisterType(typeof(RabbitMQ.MqConfig)).As(typeof(RabbitMQ.IMqConfig)).SingleInstance();
             _builder.RegisterType(typeof(RabbitMQ.AccountRegister.AccountRegisterMessagePublisher)).As(typeof(RabbitMQ.AccountRegister.AccountRegisterMessagePublisher)).SingleInstance();
