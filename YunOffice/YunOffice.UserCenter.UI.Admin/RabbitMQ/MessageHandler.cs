@@ -34,7 +34,7 @@ namespace YunOffice.UserCenter.UI.Admin.RabbitMQ
             Channel.BasicConsume(queue: QueueName, noAck: true, consumer: Consumer);
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
             Channel.Dispose();
             Connection.Dispose();
@@ -42,7 +42,7 @@ namespace YunOffice.UserCenter.UI.Admin.RabbitMQ
 
         public abstract void Hand(TMessage message);
 
-        public TMessage Deserialize(byte[] message)
+        public virtual TMessage Deserialize(byte[] message)
         {
             //string json = System.Text.Encoding.UTF8.GetString(message);
             //return Newtonsoft.Json.JsonConvert.DeserializeObject<TMessage>(json);

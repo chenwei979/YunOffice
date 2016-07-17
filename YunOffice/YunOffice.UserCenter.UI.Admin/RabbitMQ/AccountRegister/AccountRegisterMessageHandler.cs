@@ -8,14 +8,12 @@ using YunOffice.UserCenter.UI.Admin.Models;
 
 namespace YunOffice.UserCenter.UI.Admin.RabbitMQ.AccountRegister
 {
-    [Interceptor(typeof(ActionExecutorInterceptor))]
     public class AccountRegisterMessageHandler : MessageHandler<AccountRegisterViewModel>
     {
         public UserBusnissLogic BusnissLogic { get; set; }
 
-        public AccountRegisterMessageHandler(IMqConfig config, UserBusnissLogic busnissLogic) : base(config)
+        public AccountRegisterMessageHandler(IMqConfig config) : base(config)
         {
-            BusnissLogic = busnissLogic;
         }
 
         [AccountRegisterMessageHandActionExecutor]
@@ -49,20 +47,28 @@ namespace YunOffice.UserCenter.UI.Admin.RabbitMQ.AccountRegister
             if (Instance.BusnissLogic == null) return;
 
             Instance.BusnissLogic.Dispose();
+            Instance.BusnissLogic = null;
         }
     }
 
     public class ActionExecutorInterceptor : IInterceptor
     {
+        public ActionExecutorInterceptor()
+        {
+            Console.Write("ActionExecutorInterceptor");
+        }
+
         public void Intercept(IInvocation invocation)
         {
-            var actionExecutors = invocation.Method.GetCustomAttributes(true).Where(item => item.GetType().GetGenericTypeDefinition() == typeof(IActionExecutor)).Select(item =>
+            var methodName = invocation.Method.Name;
+            var actionExecutors = invocation.Method.GetCustomAttributes(true).Where(item => item is IActionExecutor).Select(item =>
             {
                 return item as IActionExecutor;
             }).ToList();
 
             actionExecutors.ForEach(item =>
             {
+                item.Instance = invocation.InvocationTarget;
                 item.OnActionExecuting();
             });
 

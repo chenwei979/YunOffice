@@ -25,6 +25,7 @@ namespace YunOffice.UserCenter.UI.Admin.Infrastructure
             _builder = new ContainerBuilder();
             RegisterTypes();
             _container = _builder.Build();
+            _container.Resolve<RabbitMQ.AccountRegister.AccountRegisterMessageHandler>();
         }
 
         public IContainer GetInstance()
@@ -38,7 +39,6 @@ namespace YunOffice.UserCenter.UI.Admin.Infrastructure
         private void RegisterTypes()
         {
             RegisterControllers();
-            _builder.Register(c => new RabbitMQ.AccountRegister.ActionExecutorInterceptor());
 
             var assemblies = BuildManager.GetReferencedAssemblies().Cast<Assembly>().Where(item => item.FullName.StartsWith("YunOffice.UserCenter", StringComparison.InvariantCultureIgnoreCase)).ToArray();
             var types = assemblies.SelectMany(assembly => assembly.GetTypes());
@@ -50,7 +50,8 @@ namespace YunOffice.UserCenter.UI.Admin.Infrastructure
 
             _builder.RegisterType(typeof(RabbitMQ.MqConfig)).As(typeof(RabbitMQ.IMqConfig)).SingleInstance();
             _builder.RegisterType(typeof(RabbitMQ.AccountRegister.AccountRegisterMessagePublisher)).As(typeof(RabbitMQ.AccountRegister.AccountRegisterMessagePublisher)).SingleInstance();
-            _builder.RegisterType(typeof(RabbitMQ.AccountRegister.AccountRegisterMessageHandler)).As(typeof(RabbitMQ.AccountRegister.AccountRegisterMessageHandler)).EnableClassInterceptors().SingleInstance().AutoActivate();
+            _builder.RegisterType<RabbitMQ.AccountRegister.AccountRegisterMessageHandler>().EnableClassInterceptors().InterceptedBy(typeof(RabbitMQ.AccountRegister.ActionExecutorInterceptor));
+            _builder.Register(c => new RabbitMQ.AccountRegister.ActionExecutorInterceptor());
         }
 
         /// <summary>
