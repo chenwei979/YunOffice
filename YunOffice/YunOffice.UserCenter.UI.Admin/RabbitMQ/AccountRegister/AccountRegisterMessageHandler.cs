@@ -47,10 +47,8 @@ namespace YunOffice.UserCenter.UI.Admin.RabbitMQ.AccountRegister
 
             var instance = Instance as AccountRegisterMessageHandler;
 
-            using (var scope = DIContainer.BeginLifetimeScope("MqHandler"))
-            {
-                instance.BusnissLogic = scope.Resolve<UserBusnissLogic>();
-            }
+            instance.BusnissLogic = DIContainer.Resolve<UserBusnissLogic>();
+
         }
 
         public virtual void OnActionExecuted()
@@ -80,19 +78,22 @@ namespace YunOffice.UserCenter.UI.Admin.RabbitMQ.AccountRegister
                 return item as IActionExecutor;
             }).ToList();
 
-            actionExecutors.ForEach(item =>
+            using (var scope = Infrastructure.AutofacContainerBuilder.Singleton.GetRootInstance().BeginLifetimeScope("MqHandler"))
             {
-                item.Instance = invocation.InvocationTarget;
-                item.DIContainer = Infrastructure.AutofacContainerBuilder.Singleton.GetRootInstance();
-                item.OnActionExecuting();
-            });
+                actionExecutors.ForEach(item =>
+                {
+                    item.Instance = invocation.InvocationTarget;
+                    item.DIContainer = scope;
+                    item.OnActionExecuting();
+                });
 
-            invocation.Proceed();
+                invocation.Proceed();
 
-            actionExecutors.ForEach(item =>
-            {
-                item.OnActionExecuted();
-            });
+                actionExecutors.ForEach(item =>
+                {
+                    item.OnActionExecuted();
+                });
+            }
         }
     }
 }
