@@ -7,7 +7,7 @@ namespace YunOffice.UserCenter.UI.Admin.Infrastructure
 {
     public class AutofacDependencyResolver : IDependencyResolver
     {
-        private IContainer _container;
+        private ILifetimeScope _container;
 
         public AutofacDependencyResolver()
         {
@@ -16,7 +16,7 @@ namespace YunOffice.UserCenter.UI.Admin.Infrastructure
 
         public object GetService(Type serviceType)
         {
-            if (_container.IsRegistered(serviceType)) return _container.Resolve(serviceType);
+            if (_container.IsRegistered(serviceType)) return AutofacContainerBuilder.Singleton.GetInstance().Resolve(serviceType);
             return null;
 
         }

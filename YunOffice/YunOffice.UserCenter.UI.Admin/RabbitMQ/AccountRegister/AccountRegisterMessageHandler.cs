@@ -1,4 +1,5 @@
-﻿using Castle.Core;
+﻿using Autofac;
+using Castle.Core;
 using Castle.DynamicProxy;
 using System;
 using System.Linq;
@@ -26,6 +27,7 @@ namespace YunOffice.UserCenter.UI.Admin.RabbitMQ.AccountRegister
 
     public interface IActionExecutor
     {
+        ILifetimeScope DIContainer { get; set; }
         dynamic Instance { get; set; }
         void OnActionExecuting();
         void OnActionExecuted();
@@ -37,12 +39,18 @@ namespace YunOffice.UserCenter.UI.Admin.RabbitMQ.AccountRegister
     {
         public dynamic Instance { get; set; }
 
+        public ILifetimeScope DIContainer { get; set; }
+
         public virtual void OnActionExecuting()
         {
             if (!(Instance is AccountRegisterMessageHandler)) return;
 
             var instance = Instance as AccountRegisterMessageHandler;
-            instance.BusnissLogic = System.Web.Mvc.DependencyResolver.Current.GetService(typeof(UserBusnissLogic)) as UserBusnissLogic;
+
+            using (var scope = DIContainer.BeginLifetimeScope("MqHandler"))
+            {
+                instance.BusnissLogic = scope.Resolve<UserBusnissLogic>();
+            }
         }
 
         public virtual void OnActionExecuted()
@@ -75,6 +83,7 @@ namespace YunOffice.UserCenter.UI.Admin.RabbitMQ.AccountRegister
             actionExecutors.ForEach(item =>
             {
                 item.Instance = invocation.InvocationTarget;
+                item.DIContainer = Infrastructure.AutofacContainerBuilder.Singleton.GetRootInstance();
                 item.OnActionExecuting();
             });
 

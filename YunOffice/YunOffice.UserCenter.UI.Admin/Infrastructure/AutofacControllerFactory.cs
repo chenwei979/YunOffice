@@ -8,7 +8,7 @@ namespace YunOffice.UserCenter.UI.Admin.Infrastructure
 {
     public class AutofacControllerFactory : DefaultControllerFactory
     {
-        private IContainer _container;
+        private ILifetimeScope _container;
 
         public AutofacControllerFactory()
         {

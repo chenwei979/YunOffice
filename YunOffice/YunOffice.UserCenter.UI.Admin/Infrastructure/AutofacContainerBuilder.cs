@@ -18,19 +18,31 @@ namespace YunOffice.UserCenter.UI.Admin.Infrastructure
         }
 
         private ContainerBuilder _builder;
-        private IContainer _container;
+        private ILifetimeScope _container;
+        private ILifetimeScope _rootContainer;
 
         private AutofacContainerBuilder()
         {
             _builder = new ContainerBuilder();
             RegisterTypes();
-            _container = _builder.Build();
+            _rootContainer = _builder.Build();
+            _container = _rootContainer;
             _container.Resolve<RabbitMQ.AccountRegister.AccountRegisterMessageHandler>();
         }
 
-        public IContainer GetInstance()
+        public ILifetimeScope GetRootInstance()
+        {
+            return _rootContainer;
+        }
+
+        public ILifetimeScope GetInstance()
         {
             return _container;
+        }
+
+        public void SetInstance(ILifetimeScope container)
+        {
+            _container = container;
         }
 
         /// <summary>
@@ -44,8 +56,9 @@ namespace YunOffice.UserCenter.UI.Admin.Infrastructure
             var types = assemblies.SelectMany(assembly => assembly.GetTypes());
             _builder.RegisterTypes(types.Where(t => t.Name.EndsWith("BusnissLogic")).ToArray());
             _builder.RegisterTypes(types.Where(t => t.Name.EndsWith("DataAccess")).ToArray());
-            _builder.RegisterType(typeof(Common.DataAccess.SqlServerDatabase)).As(typeof(Common.DataAccess.IDatabase));
-            _builder.RegisterType(typeof(Common.DataAccess.UnitOfWork)).As(typeof(Common.DataAccess.IUnitOfWork));
+            _builder.RegisterType(typeof(Common.DataAccess.SqlServerDatabase)).As(typeof(Common.DataAccess.IDatabase)).InstancePerMatchingLifetimeScope("AutofacWebRequest", "MqHandler");
+            //_builder.RegisterType(typeof(Common.DataAccess.UnitOfWork)).As(typeof(Common.DataAccess.IUnitOfWork)).InstancePerRequest();
+            _builder.RegisterType(typeof(Common.DataAccess.UnitOfWork)).As(typeof(Common.DataAccess.IUnitOfWork)).InstancePerMatchingLifetimeScope("AutofacWebRequest", "MqHandler");
             _builder.RegisterGeneric(typeof(Common.DataAccess.Repository<>)).As(typeof(Common.DataAccess.IRepository<>));
 
             _builder.RegisterType(typeof(RabbitMQ.MqConfig)).As(typeof(RabbitMQ.IMqConfig)).SingleInstance();
