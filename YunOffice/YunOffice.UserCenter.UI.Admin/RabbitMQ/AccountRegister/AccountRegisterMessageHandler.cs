@@ -39,15 +39,21 @@ namespace YunOffice.UserCenter.UI.Admin.RabbitMQ.AccountRegister
 
         public virtual void OnActionExecuting()
         {
-            Instance.BusnissLogic = System.Web.Mvc.DependencyResolver.Current.GetService(typeof(UserBusnissLogic)) as UserBusnissLogic;
+            if (!(Instance is AccountRegisterMessageHandler)) return;
+
+            var instance = Instance as AccountRegisterMessageHandler;
+            instance.BusnissLogic = System.Web.Mvc.DependencyResolver.Current.GetService(typeof(UserBusnissLogic)) as UserBusnissLogic;
         }
 
         public virtual void OnActionExecuted()
         {
-            if (Instance.BusnissLogic == null) return;
+            if (!(Instance is AccountRegisterMessageHandler)) return;
 
-            Instance.BusnissLogic.Dispose();
-            Instance.BusnissLogic = null;
+            var instance = Instance as AccountRegisterMessageHandler;
+            if (instance.BusnissLogic == null) return;
+
+            instance.BusnissLogic.Dispose();
+            instance.BusnissLogic = null;
         }
     }
 
