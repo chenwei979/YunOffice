@@ -3,6 +3,8 @@ using Castle.Core;
 using Castle.DynamicProxy;
 using System;
 using System.Linq;
+using YunOffice.Common.AOP;
+using YunOffice.Common.RabbitMq;
 using YunOffice.UserCenter.BusnissLogic;
 using YunOffice.UserCenter.Entities;
 using YunOffice.UserCenter.UI.Admin.Models;

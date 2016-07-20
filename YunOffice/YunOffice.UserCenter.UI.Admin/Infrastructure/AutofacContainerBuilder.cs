@@ -61,10 +61,10 @@ namespace YunOffice.UserCenter.UI.Admin.Infrastructure
             _builder.RegisterType(typeof(Common.DataAccess.UnitOfWork)).As(typeof(Common.DataAccess.IUnitOfWork)).InstancePerMatchingLifetimeScope("AutofacWebRequest", "MqHandler");
             _builder.RegisterGeneric(typeof(Common.DataAccess.Repository<>)).As(typeof(Common.DataAccess.IRepository<>));
 
-            _builder.RegisterType(typeof(RabbitMQ.MqConfig)).As(typeof(RabbitMQ.IMqConfig)).SingleInstance();
+            _builder.RegisterType(typeof(Common.RabbitMq.MqConfig)).As(typeof(Common.RabbitMq.IMqConfig)).SingleInstance();
             _builder.RegisterType(typeof(RabbitMQ.AccountRegister.AccountRegisterMessagePublisher)).As(typeof(RabbitMQ.AccountRegister.AccountRegisterMessagePublisher)).SingleInstance();
-            _builder.RegisterType<RabbitMQ.AccountRegister.AccountRegisterMessageHandler>().EnableClassInterceptors().InterceptedBy(typeof(RabbitMQ.AccountRegister.ActionExecutorInterceptor));
-            _builder.Register(c => new RabbitMQ.AccountRegister.ActionExecutorInterceptor());
+            _builder.RegisterType<RabbitMQ.AccountRegister.AccountRegisterMessageHandler>().EnableClassInterceptors().InterceptedBy(typeof(Common.AOP.ActionExecutorInterceptor));
+            _builder.Register(c => new Common.AOP.ActionExecutorInterceptor());
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
-﻿using YunOffice.UserCenter.UI.Admin.Models;
+﻿using YunOffice.Common.RabbitMq;
+using YunOffice.UserCenter.UI.Admin.Models;
 
 namespace YunOffice.UserCenter.UI.Admin.RabbitMQ.AccountRegister
 {
