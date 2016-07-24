@@ -8,27 +8,27 @@ namespace YunOffice.UserCenter.UI.Admin.Infrastructure
 {
     public class AutofacDependencyResolver : IDependencyResolver
     {
-        private ILifetimeScope _container;
-
-        public AutofacDependencyResolver()
+        protected ILifetimeScope Container
         {
-            _container = AutofacContainerBuilder.Singleton.GetInstance();
+            get
+            {
+                return AutofacContainerBuilder.Singleton.GetInstance();
+            }
         }
 
         public object GetService(Type serviceType)
         {
-            if (_container.IsRegistered(serviceType)) return AutofacContainerBuilder.Singleton.GetInstance().Resolve(serviceType);
+            if (Container.IsRegistered(serviceType)) return Container.Resolve(serviceType);
             return null;
-
         }
 
         public IEnumerable<object> GetServices(Type serviceType)
         {
             var type = typeof(IEnumerable<>).MakeGenericType(new Type[]
-			{
-				serviceType
-			});
-            var obj = _container.Resolve(type);
+            {
+                serviceType
+            });
+            var obj = Container.Resolve(type);
             return obj as IEnumerable<object>;
         }
     }
