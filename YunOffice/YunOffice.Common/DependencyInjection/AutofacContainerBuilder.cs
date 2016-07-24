@@ -1,5 +1,7 @@
 ﻿using Autofac;
+using System.Linq;
 using System.Reflection;
+using System.Web.Compilation;
 
 namespace YunOffice.Common.DependencyInjection
 {
@@ -41,10 +43,8 @@ namespace YunOffice.Common.DependencyInjection
 
         private void RegisterTypes()
         {
-            BuildManager.GetReferencedAssemblies().Cast<Assembly>()
-
-            var assembly = Assembly.GetExecutingAssembly();
-            _builder.RegisterAssemblyModules(assembly);
+            var assemblies = BuildManager.GetReferencedAssemblies().Cast<Assembly>().ToArray();
+            _builder.RegisterAssemblyModules(assemblies);
         }
     }
 }
