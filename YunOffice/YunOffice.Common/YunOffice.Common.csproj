@@ -67,6 +67,7 @@
     <Compile Include="DataAccess\Interface\IUnitOfWork.cs" />
     <Compile Include="DataAccess\Repository.cs" />
     <Compile Include="DataAccess\UnitOfWork.cs" />
+    <Compile Include="DependencyInjection\AutofacContainerBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterModule.cs" />
   </ItemGroup>
