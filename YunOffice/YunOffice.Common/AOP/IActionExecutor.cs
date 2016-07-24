@@ -4,7 +4,7 @@ namespace YunOffice.Common.AOP
 {
     public interface IActionExecutor
     {
-        ILifetimeScope DIContainer { get; set; }
+        ILifetimeScope DependencyResolver { get; set; }
         dynamic Instance { get; set; }
         void OnActionExecuting();
         void OnActionExecuted();

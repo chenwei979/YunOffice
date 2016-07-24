@@ -31,7 +31,7 @@ namespace YunOffice.UserCenter.UI.Admin.RabbitMQ.AccountRegister
     {
         public dynamic Instance { get; set; }
 
-        public ILifetimeScope DIContainer { get; set; }
+        public ILifetimeScope DependencyResolver { get; set; }
 
         public virtual void OnActionExecuting()
         {
@@ -39,7 +39,7 @@ namespace YunOffice.UserCenter.UI.Admin.RabbitMQ.AccountRegister
 
             var instance = Instance as AccountRegisterMessageHandler;
 
-            instance.BusnissLogic = DIContainer.Resolve<UserBusnissLogic>();
+            instance.BusnissLogic = DependencyResolver.Resolve<UserBusnissLogic>();
 
         }
 
