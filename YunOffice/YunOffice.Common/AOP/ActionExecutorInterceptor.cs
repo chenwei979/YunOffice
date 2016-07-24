@@ -1,6 +1,7 @@
 ﻿using Castle.DynamicProxy;
 using System;
 using System.Linq;
+using YunOffice.Common.DependencyInjection;
 
 namespace YunOffice.Common.AOP
 {
@@ -19,22 +20,22 @@ namespace YunOffice.Common.AOP
                 return item as IActionExecutor;
             }).ToList();
 
-            //using (var scope = Infrastructure.AutofacContainerBuilder.Singleton.GetRootInstance().BeginLifetimeScope("MqHandler"))
-            //{
-            //    actionExecutors.ForEach(item =>
-            //    {
-            //        item.Instance = invocation.InvocationTarget;
-            //        item.DIContainer = scope;
-            //        item.OnActionExecuting();
-            //    });
+            using (var scope = AutofacContainerBuilder.Singleton.GetRootInstance().BeginLifetimeScope("ActionExecutorInterceptor"))
+            {
+                actionExecutors.ForEach(item =>
+                {
+                    item.Instance = invocation.InvocationTarget;
+                    item.DependencyResolver = scope;
+                    item.OnActionExecuting();
+                });
 
-            //    invocation.Proceed();
+                invocation.Proceed();
 
-            //    actionExecutors.ForEach(item =>
-            //    {
-            //        item.OnActionExecuted();
-            //    });
-            //}
+                actionExecutors.ForEach(item =>
+                {
+                    item.OnActionExecuted();
+                });
+            }
         }
     }
 }
