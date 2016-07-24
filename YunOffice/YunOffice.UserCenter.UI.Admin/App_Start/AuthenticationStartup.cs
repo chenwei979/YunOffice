@@ -1,10 +1,7 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.Owin;
-using Microsoft.Owin.Security.Cookies;
+﻿using Microsoft.Owin;
 using Owin;
-using System;
 using System.Threading.Tasks;
-using AppFunc = System.Func<System.Collections.Generic.IDictionary<string, object>, System.Threading.Tasks.Task>;
+using YunOffice.Common.DependencyInjection;
 
 [assembly: OwinStartup(typeof(YunOffice.UserCenter.UI.Admin.App_Start.OwinStartup))]
 
@@ -34,11 +31,11 @@ namespace YunOffice.UserCenter.UI.Admin.App_Start
 
         public async override Task Invoke(IOwinContext context)
         {
-            using (var scope = Infrastructure.AutofacContainerBuilder.Singleton.GetRootInstance().BeginLifetimeScope("AutofacWebRequest"))
+            using (var scope = AutofacContainerBuilder.Singleton.GetRootInstance().BeginLifetimeScope("AutofacWebRequest"))
             {
-                Infrastructure.AutofacContainerBuilder.Singleton.SetInstance(scope);
+                AutofacContainerBuilder.Singleton.SetInstance(scope);
                 await Next.Invoke(context);
-                Infrastructure.AutofacContainerBuilder.Singleton.SetInstance(Infrastructure.AutofacContainerBuilder.Singleton.GetRootInstance());
+                AutofacContainerBuilder.Singleton.SetInstance(AutofacContainerBuilder.Singleton.GetRootInstance());
             }
         }
     }

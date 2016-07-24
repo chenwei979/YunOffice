@@ -2,7 +2,7 @@
 using System;
 using System.Web.Mvc;
 using System.Web.Routing;
-
+using YunOffice.Common.DependencyInjection;
 
 namespace YunOffice.UserCenter.UI.Admin.Infrastructure
 {

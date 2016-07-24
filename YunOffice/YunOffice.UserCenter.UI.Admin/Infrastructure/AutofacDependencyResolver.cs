@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using YunOffice.Common.DependencyInjection;
 
 namespace YunOffice.UserCenter.UI.Admin.Infrastructure
 {
