@@ -58,7 +58,6 @@ namespace YunOffice.UserCenter.UI.Admin.Infrastructure
 
             _builder.RegisterType(typeof(RabbitMQ.AccountRegister.AccountRegisterMessagePublisher)).As(typeof(RabbitMQ.AccountRegister.AccountRegisterMessagePublisher)).SingleInstance();
             _builder.RegisterType<RabbitMQ.AccountRegister.AccountRegisterMessageHandler>().EnableClassInterceptors().InterceptedBy(typeof(Common.AOP.ActionExecutorInterceptor));
-            _builder.Register(c => new Common.AOP.ActionExecutorInterceptor());
         }
 
         /// <summary>
