@@ -47,9 +47,11 @@ namespace YunOffice.Common.RabbitMq
             //string json = System.Text.Encoding.UTF8.GetString(message);
             //return Newtonsoft.Json.JsonConvert.DeserializeObject<TMessage>(json);
 
-            var stream = new MemoryStream(message, false);
-            stream.Position = 0;
-            return Serializer.Deserialize<TMessage>(stream);
+            using (var stream = new MemoryStream(message, false))
+            {
+                stream.Position = 0;
+                return Serializer.Deserialize<TMessage>(stream);
+            }
         }
     }
 }
