@@ -12,9 +12,9 @@ namespace YunOffice.UserCenter.UI.Admin.RabbitMQ.AccountRegister
     public class AccountRegisterMessageHandler : MessageHandler<AccountRegisterViewModel>
     {
         public UserBusnissLogic BusnissLogic { get; set; }
-        public RedisDataAccess<UserEntity> RedisDataAccess { get; set; }
+        public RedisDataAccess<AccountRegisterViewModel> RedisDataAccess { get; set; }
 
-        public AccountRegisterMessageHandler(IMqConfig config, RedisDataAccess<UserEntity> redisDataAccess) : base(config)
+        public AccountRegisterMessageHandler(IMqConfig config, RedisDataAccess<AccountRegisterViewModel> redisDataAccess) : base(config)
         {
             RedisDataAccess = redisDataAccess;
         }
@@ -25,7 +25,7 @@ namespace YunOffice.UserCenter.UI.Admin.RabbitMQ.AccountRegister
             //System.Threading.Thread.Sleep(5000);
             var entity = EmitMapperFactory.Singleton.GetInstance<AccountRegisterViewModel, UserEntity>(message);
             BusnissLogic.Save(entity);
-            RedisDataAccess.Set(entity.Account, entity);
+            RedisDataAccess.Set(message.Account, message);
         }
     }
 
