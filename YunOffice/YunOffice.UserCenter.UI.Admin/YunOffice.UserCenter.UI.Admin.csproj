@@ -195,7 +195,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\AutofacContainerBuilder.cs" />
     <Compile Include="Infrastructure\AutofacControllerFactory.cs" />
     <Compile Include="Infrastructure\AutofacDependencyResolver.cs" />
     <Compile Include="Infrastructure\ClaimBaseFormAuth.cs" />
