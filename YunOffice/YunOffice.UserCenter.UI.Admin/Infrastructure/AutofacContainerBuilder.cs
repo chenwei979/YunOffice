@@ -54,9 +54,8 @@ namespace YunOffice.UserCenter.UI.Admin.Infrastructure
 
             var assemblies = BuildManager.GetReferencedAssemblies().Cast<Assembly>().Where(item => item.FullName.StartsWith("YunOffice.UserCenter", StringComparison.InvariantCultureIgnoreCase)).ToArray();
             var types = assemblies.SelectMany(assembly => assembly.GetTypes());
-            
 
-            _builder.RegisterType(typeof(Common.RabbitMq.MqConfig)).As(typeof(Common.RabbitMq.IMqConfig)).SingleInstance();
+
             _builder.RegisterType(typeof(RabbitMQ.AccountRegister.AccountRegisterMessagePublisher)).As(typeof(RabbitMQ.AccountRegister.AccountRegisterMessagePublisher)).SingleInstance();
             _builder.RegisterType<RabbitMQ.AccountRegister.AccountRegisterMessageHandler>().EnableClassInterceptors().InterceptedBy(typeof(Common.AOP.ActionExecutorInterceptor));
             _builder.Register(c => new Common.AOP.ActionExecutorInterceptor());
