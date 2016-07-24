@@ -31,7 +31,7 @@ namespace YunOffice.UserCenter.UI.Admin.App_Start
 
         public async override Task Invoke(IOwinContext context)
         {
-            using (var scope = AutofacContainerBuilder.Singleton.GetRootInstance().BeginLifetimeScope("AutofacWebRequest"))
+            using (var scope = AutofacContainerBuilder.Singleton.GetInstance().BeginLifetimeScope("AutofacWebRequest"))
             {
                 await Next.Invoke(context);
             }

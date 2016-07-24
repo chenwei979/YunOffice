@@ -20,7 +20,7 @@ namespace YunOffice.Common.AOP
                 return item as IActionExecutor;
             }).ToList();
 
-            using (var scope = AutofacContainerBuilder.Singleton.GetRootInstance().BeginLifetimeScope("ActionExecutorInterceptor"))
+            using (var scope = AutofacContainerBuilder.Singleton.GetInstance().BeginLifetimeScope("ActionExecutorInterceptor"))
             {
                 actionExecutors.ForEach(item =>
                 {

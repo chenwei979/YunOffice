@@ -15,18 +15,18 @@ namespace YunOffice.Common.DependencyInjection
         }
 
         private ContainerBuilder _builder;
-        private ILifetimeScope _rootContainer;
+        private ILifetimeScope _container;
 
         private AutofacContainerBuilder()
         {
             _builder = new ContainerBuilder();
             RegisterTypes();
-            _rootContainer = _builder.Build();
+            _container = _builder.Build();
         }
 
-        public ILifetimeScope GetRootInstance()
+        public ILifetimeScope GetInstance()
         {
-            return _rootContainer;
+            return _container;
         }
 
         private void RegisterTypes()

@@ -12,7 +12,7 @@ namespace YunOffice.UserCenter.UI.Admin.Infrastructure
 
         public AutofacDependencyResolver()
         {
-            Container = AutofacContainerBuilder.Singleton.GetRootInstance().BeginLifetimeScope("AutofacWebRequest");
+            Container = AutofacContainerBuilder.Singleton.GetInstance().BeginLifetimeScope("AutofacWebRequest");
         }
 
         public object GetService(Type serviceType)

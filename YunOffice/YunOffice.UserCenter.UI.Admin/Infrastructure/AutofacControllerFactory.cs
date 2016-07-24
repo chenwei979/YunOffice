@@ -12,7 +12,7 @@ namespace YunOffice.UserCenter.UI.Admin.Infrastructure
 
         public AutofacControllerFactory()
         {
-            Container = AutofacContainerBuilder.Singleton.GetRootInstance().BeginLifetimeScope("AutofacWebRequest");
+            Container = AutofacContainerBuilder.Singleton.GetInstance().BeginLifetimeScope("AutofacWebRequest");
         }
 
         protected override IController GetControllerInstance(RequestContext requestContext, Type controllerType)
