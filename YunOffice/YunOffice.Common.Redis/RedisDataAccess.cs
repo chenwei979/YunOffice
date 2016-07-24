@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
+using ProtoBuf;
 using StackExchange.Redis;
 using System;
+using System.IO;
 
 namespace YunOffice.Common.Redis
 {
@@ -13,16 +15,32 @@ namespace YunOffice.Common.Redis
             RedisManager = redisManager;
         }
 
-        public virtual TMessage Deserialize(string message)
+        public virtual TMessage Deserialize(byte[] message)
         {
-            return JsonConvert.DeserializeObject<TMessage>(message);
+            using (var stream = new MemoryStream(message, false))
+            {
+                stream.Position = 0;
+                return Serializer.Deserialize<TMessage>(stream);
+            }
         }
 
-        public virtual string Serialize(TMessage message)
+        public virtual byte[] Serialize(TMessage message)
         {
-            return JsonConvert.SerializeObject(message);
+            using (var stream = new MemoryStream())
+            {
+                Serializer.Serialize(stream, message);
+                return stream.ToArray();
+            }
         }
 
+        //public virtual TMessage Deserialize(string message)
+        //{
+        //    return JsonConvert.DeserializeObject<TMessage>(message);
+        //}
+        //public virtual string Serialize(TMessage message)
+        //{
+        //    return JsonConvert.SerializeObject(message);
+        //}
 
         public bool HasKey(string key)
         {
@@ -31,7 +49,7 @@ namespace YunOffice.Common.Redis
 
         public TMessage Get(string key)
         {
-            string value = RedisManager.GetDatabase().StringGet(key);
+            byte[] value = RedisManager.GetDatabase().StringGet(key);
             return Deserialize(value);
         }
 
