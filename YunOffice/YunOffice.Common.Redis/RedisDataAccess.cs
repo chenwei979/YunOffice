@@ -15,32 +15,32 @@ namespace YunOffice.Common.Redis
             RedisManager = redisManager;
         }
 
-        public virtual TMessage Deserialize(byte[] message)
+        //protected virtual TMessage Deserialize(byte[] message)
+        //{
+        //    using (var stream = new MemoryStream(message, false))
+        //    {
+        //        stream.Position = 0;
+        //        return Serializer.Deserialize<TMessage>(stream);
+        //    }
+        //}
+        //protected virtual byte[] Serialize(TMessage message)
+        //{
+        //    using (var stream = new MemoryStream())
+        //    {
+        //        Serializer.Serialize(stream, message);
+        //        return stream.ToArray();
+        //    }
+        //}
+
+        protected virtual TMessage Deserialize(string message)
         {
-            using (var stream = new MemoryStream(message, false))
-            {
-                stream.Position = 0;
-                return Serializer.Deserialize<TMessage>(stream);
-            }
+            return JsonConvert.DeserializeObject<TMessage>(message);
         }
 
-        public virtual byte[] Serialize(TMessage message)
+        protected virtual string Serialize(TMessage message)
         {
-            using (var stream = new MemoryStream())
-            {
-                Serializer.Serialize(stream, message);
-                return stream.ToArray();
-            }
+            return JsonConvert.SerializeObject(message);
         }
-
-        //public virtual TMessage Deserialize(string message)
-        //{
-        //    return JsonConvert.DeserializeObject<TMessage>(message);
-        //}
-        //public virtual string Serialize(TMessage message)
-        //{
-        //    return JsonConvert.SerializeObject(message);
-        //}
 
         public bool HasKey(string key)
         {
@@ -49,7 +49,9 @@ namespace YunOffice.Common.Redis
 
         public TMessage Get(string key)
         {
-            byte[] value = RedisManager.GetDatabase().StringGet(key);
+            if (!HasKey(key)) return default(TMessage);
+
+            string value = RedisManager.GetDatabase().StringGet(key);
             return Deserialize(value);
         }
 

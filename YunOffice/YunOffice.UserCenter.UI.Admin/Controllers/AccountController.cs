@@ -1,7 +1,8 @@
 ﻿using System.Web.Mvc;
+using YunOffice.Common.Redis;
 using YunOffice.UserCenter.BusnissLogic;
-using YunOffice.UserCenter.UI.Admin.RabbitMQ.AccountRegister;
 using YunOffice.UserCenter.UI.Admin.Models;
+using YunOffice.UserCenter.UI.Admin.RabbitMQ.AccountRegister;
 
 namespace YunOffice.UserCenter.UI.Admin.Controllers
 {
@@ -9,12 +10,15 @@ namespace YunOffice.UserCenter.UI.Admin.Controllers
     {
         public UserBusnissLogic BusnissLogic { get; set; }
         public AccountRegisterMessagePublisher MessagePublisher { get; set; }
+        public RedisDataAccess<AccountRegisterViewModel> RedisDataAccess { get; set; }
 
         public AccountController(UserBusnissLogic busnissLogic
-            , AccountRegisterMessagePublisher messagePublisher)
+            , AccountRegisterMessagePublisher messagePublisher
+            , RedisDataAccess<AccountRegisterViewModel> redisDataAccess)
         {
             BusnissLogic = busnissLogic;
             MessagePublisher = messagePublisher;
+            RedisDataAccess = redisDataAccess;
         }
 
         [HttpGet]
@@ -26,7 +30,17 @@ namespace YunOffice.UserCenter.UI.Admin.Controllers
         [HttpPost]
         public ActionResult Login(string username, string password)
         {
-            var logined = BusnissLogic.Login(username, password);
+            var loginEntity = RedisDataAccess.Get(username);
+
+            var logined = false;
+            if (loginEntity != null)
+            {
+                logined = loginEntity.Password == password;
+            }
+            else
+            {
+                logined = BusnissLogic.Login(username, password);
+            }
 
             if (logined) return Redirect("/Home/Index/");
             return View();
@@ -49,6 +63,15 @@ namespace YunOffice.UserCenter.UI.Admin.Controllers
             });
 
             return Redirect("/Home/Index/");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                BusnissLogic.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }
