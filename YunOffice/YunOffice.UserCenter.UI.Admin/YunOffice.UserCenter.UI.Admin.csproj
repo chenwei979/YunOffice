@@ -235,6 +235,10 @@
       <Project>{78abc00c-28aa-4d3c-9bd8-56f1fab61e3d}</Project>
       <Name>YunOffice.Common.RabbitMq</Name>
     </ProjectReference>
+    <ProjectReference Include="..\YunOffice.Common.Redis\YunOffice.Common.Redis.csproj">
+      <Project>{1EC9A6F1-61D9-4144-BA27-9CAC9174E37F}</Project>
+      <Name>YunOffice.Common.Redis</Name>
+    </ProjectReference>
     <ProjectReference Include="..\YunOffice.Common\YunOffice.Common.csproj">
       <Project>{8cc5d3c0-23a3-4e17-a8c8-0535be5ee2c6}</Project>
       <Name>YunOffice.Common</Name>
