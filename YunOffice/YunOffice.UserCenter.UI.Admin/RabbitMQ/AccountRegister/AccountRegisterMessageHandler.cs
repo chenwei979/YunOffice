@@ -19,12 +19,13 @@ namespace YunOffice.UserCenter.UI.Admin.RabbitMQ.AccountRegister
         [AccountRegisterMessageHandActionExecutor]
         public override void Hand(AccountRegisterViewModel message)
         {
+            //System.Threading.Thread.Sleep(5000);
             var entity = EmitMapperFactory.Singleton.GetInstance<AccountRegisterViewModel, UserEntity>(message);
             BusnissLogic.Save(entity);
         }
     }
 
-    
+
 
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
     public class AccountRegisterMessageHandActionExecutorAttribute : Attribute, IActionExecutor
@@ -53,5 +54,5 @@ namespace YunOffice.UserCenter.UI.Admin.RabbitMQ.AccountRegister
             instance.BusnissLogic.Dispose();
             instance.BusnissLogic = null;
         }
-    } 
+    }
 }

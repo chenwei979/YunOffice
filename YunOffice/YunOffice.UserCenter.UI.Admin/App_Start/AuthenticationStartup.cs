@@ -11,7 +11,7 @@ namespace YunOffice.UserCenter.UI.Admin.App_Start
     {
         public void Configuration(IAppBuilder app)
         {
-            app.Use(typeof(AutofacWebRequestLifetimeScopeMiddleware));
+            //app.Use(typeof(AutofacWebRequestLifetimeScopeMiddleware));
 
             //app.UseCookieAuthentication(new CookieAuthenticationOptions
             //{

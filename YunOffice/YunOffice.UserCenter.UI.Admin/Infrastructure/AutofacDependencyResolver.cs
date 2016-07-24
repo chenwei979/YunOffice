@@ -8,12 +8,11 @@ namespace YunOffice.UserCenter.UI.Admin.Infrastructure
 {
     public class AutofacDependencyResolver : IDependencyResolver
     {
-        protected ILifetimeScope Container
+        protected ILifetimeScope Container { get; set; }
+
+        public AutofacDependencyResolver()
         {
-            get
-            {
-                return AutofacContainerBuilder.Singleton.GetInstance();
-            }
+            Container = AutofacContainerBuilder.Singleton.GetRootInstance().BeginLifetimeScope("AutofacWebRequest");
         }
 
         public object GetService(Type serviceType)
