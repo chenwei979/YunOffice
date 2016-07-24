@@ -28,9 +28,9 @@ namespace YunOffice.UserCenter.UI.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(string username, string password)
+        public ActionResult Login(string account, string password)
         {
-            var loginEntity = RedisDataAccess.Get(username);
+            var loginEntity = RedisDataAccess.Get(account);
 
             var logined = false;
             if (loginEntity != null)
@@ -39,7 +39,7 @@ namespace YunOffice.UserCenter.UI.Admin.Controllers
             }
             else
             {
-                logined = BusnissLogic.Login(username, password);
+                logined = BusnissLogic.Login(account, password);
             }
 
             if (logined) return Redirect("/Home/Index/");
@@ -53,11 +53,11 @@ namespace YunOffice.UserCenter.UI.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(string displayname, string username, string password)
+        public ActionResult Register(string displayname, string account, string password)
         {
             MessagePublisher.Push(new AccountRegisterViewModel()
             {
-                Account = username,
+                Account = account,
                 Password = password,
                 DisplayName = displayname
             });
