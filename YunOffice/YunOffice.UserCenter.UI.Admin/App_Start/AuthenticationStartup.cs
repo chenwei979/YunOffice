@@ -33,9 +33,7 @@ namespace YunOffice.UserCenter.UI.Admin.App_Start
         {
             using (var scope = AutofacContainerBuilder.Singleton.GetRootInstance().BeginLifetimeScope("AutofacWebRequest"))
             {
-                AutofacContainerBuilder.Singleton.SetInstance(scope);
                 await Next.Invoke(context);
-                AutofacContainerBuilder.Singleton.SetInstance(AutofacContainerBuilder.Singleton.GetRootInstance());
             }
         }
     }

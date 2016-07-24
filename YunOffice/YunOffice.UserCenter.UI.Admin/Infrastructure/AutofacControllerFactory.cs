@@ -10,7 +10,7 @@ namespace YunOffice.UserCenter.UI.Admin.Infrastructure
     {
         protected override IController GetControllerInstance(RequestContext requestContext, Type controllerType)
         {
-            return controllerType == null ? null : (IController)AutofacContainerBuilder.Singleton.GetInstance().Resolve(controllerType);
+            return controllerType == null ? null : (IController)AutofacContainerBuilder.Singleton.GetRootInstance().Resolve(controllerType);
         }
     }
 }
