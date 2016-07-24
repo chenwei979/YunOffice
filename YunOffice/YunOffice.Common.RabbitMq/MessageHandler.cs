@@ -18,7 +18,7 @@ namespace YunOffice.Common.RabbitMq
             Connection = factory.CreateConnection();
             Channel = Connection.CreateModel();
 
-            QueueName = "YunOffice.UserCenter.UI.Admin.RabbitMQ.AccountRegister.AccountRegisterMessage";//this.GetType().FullName.Replace("Handler", string.Empty);
+            QueueName = this.GetType().BaseType.FullName.Replace("Handler", string.Empty);
             Channel.QueueDeclare(queue: QueueName,
                                 durable: false,
                                 exclusive: false,
