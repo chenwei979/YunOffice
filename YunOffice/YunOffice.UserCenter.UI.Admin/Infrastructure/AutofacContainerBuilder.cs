@@ -54,12 +54,7 @@ namespace YunOffice.UserCenter.UI.Admin.Infrastructure
 
             var assemblies = BuildManager.GetReferencedAssemblies().Cast<Assembly>().Where(item => item.FullName.StartsWith("YunOffice.UserCenter", StringComparison.InvariantCultureIgnoreCase)).ToArray();
             var types = assemblies.SelectMany(assembly => assembly.GetTypes());
-            _builder.RegisterTypes(types.Where(t => t.Name.EndsWith("BusnissLogic")).ToArray());
-            _builder.RegisterTypes(types.Where(t => t.Name.EndsWith("DataAccess")).ToArray());
-            _builder.RegisterType(typeof(Common.DataAccess.SqlServerDatabase)).As(typeof(Common.DataAccess.IDatabase)).InstancePerMatchingLifetimeScope("AutofacWebRequest", "MqHandler");
-            //_builder.RegisterType(typeof(Common.DataAccess.UnitOfWork)).As(typeof(Common.DataAccess.IUnitOfWork)).InstancePerRequest();
-            _builder.RegisterType(typeof(Common.DataAccess.UnitOfWork)).As(typeof(Common.DataAccess.IUnitOfWork)).InstancePerMatchingLifetimeScope("AutofacWebRequest", "MqHandler");
-            _builder.RegisterGeneric(typeof(Common.DataAccess.Repository<>)).As(typeof(Common.DataAccess.IRepository<>));
+            
 
             _builder.RegisterType(typeof(Common.RabbitMq.MqConfig)).As(typeof(Common.RabbitMq.IMqConfig)).SingleInstance();
             _builder.RegisterType(typeof(RabbitMQ.AccountRegister.AccountRegisterMessagePublisher)).As(typeof(RabbitMQ.AccountRegister.AccountRegisterMessagePublisher)).SingleInstance();

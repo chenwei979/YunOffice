@@ -68,6 +68,7 @@
     <Compile Include="DataAccess\Repository.cs" />
     <Compile Include="DataAccess\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegisterModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
