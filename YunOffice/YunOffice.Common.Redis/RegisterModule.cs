@@ -7,7 +7,7 @@ namespace YunOffice.Common.Redis
     {
         protected override void Load(ContainerBuilder builder)
         {
-            var redisManager = ConnectionMultiplexer.Connect("192.168.232.128");
+            var redisManager = ConnectionMultiplexer.Connect("192.168.232.128,password=brucechen");
             builder.RegisterInstance(redisManager).As<ConnectionMultiplexer>().SingleInstance();
             builder.RegisterGeneric(typeof(RedisDataAccess<>)).As(typeof(RedisDataAccess<>));
         }
